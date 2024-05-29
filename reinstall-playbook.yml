@@ -1,0 +1,8 @@
+---
+- name: Reinstall playbook
+  hosts: localhost
+  roles:
+    - role: systemSetup
+    - role: packageInstall
+    - role: flatpakInstall
+    # - role: distroboxInstall

@@ -1,0 +1,8 @@
+---
+- name: Install packages
+  ansible.builtin.include_tasks: aptInstall.yml
+  when: ansible_facts['os_family'] == "Debian" or ansible_facts['os_family'] == "Ubuntu"
+
+- name: Install packages
+  ansible.builtin.include_tasks: dnfInstall.yml
+  when: ansible_facts['os_family'] == "RedHat"

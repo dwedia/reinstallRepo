@@ -1,0 +1,38 @@
+---
+- name: Create distrobox containers
+  ansible.builtin.shell:
+    cmd: yes | distrobox create -n "{{ item }}" -i fedora:38
+  loop:
+    - fws38
+  changed_when: false
+
+- name: Install packages in fws38 container
+  ansible.builtin.shell:
+    cmd: distrobox enter fws38 -- "{{ item }}"
+  loop:
+    - "sudo dnf install -y htop"
+    - "sudo dnf install -y tldr"
+    - "sudo dnf install -y tmux"
+    - "sudo dnf install -y tree"
+    - "sudo dnf install -y bat"
+    - "sudo dnf install -y exa"
+    - "sudo dnf install -y dua-cli"
+    - "sudo dnf install -y which"
+    - "sudo dnf install -y feh"
+    - "sudo dnf install -y rofi"
+  changed_when: false
+
+- name: Export packages in fws38 container
+  ansible.builtin.shell:
+    cmd: distrobox enter fws38 -- "{{ item }}"
+  loop:
+    - "distrobox-export -b /usr/bin/htop -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/tldr -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/tmux -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/tree -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/bat -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/exa -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/dua -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/feh -ep $HOME/.local/bin"
+    - "distrobox-export -b /usr/bin/rofi -ep $HOME/.local/bin"
+  changed_when: false

@@ -1,0 +1,113 @@
+---
+- name: Get Fedora Version
+  command: "rpm -E %fedora"
+  register: fedora_version
+
+# - name: Download RPM Fusion Free 
+#   ansible.builtin.get_url:
+#     url: "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version.stdout }}.noarch.rpm"
+#     dest: /tmp/rpmfusion-free-release.rpm
+
+# - name: Download RPM Fusion NonFree 
+#   ansible.builtin.get_url:
+#     url: "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version.stdout }}.noarch.rpm"
+#     dest: /tmp/rpmfusion-nonfree-release.rpm
+
+- name: add RPMFusion gpg keys
+  ansible.builtin.rpm_key:
+    key: "{{ item }}"
+    state: present
+  with_items:
+    - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-2020"
+    - "https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-nonfree-fedora-2020"
+  become: true
+
+- name: Install  RPMFusion
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_version.stdout }}.noarch.rpm"
+    - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_version.stdout }}.noarch.rpm"
+  become: true
+
+# - name: Setup RPMFusion
+#   ansible.builtin.shell: sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+#   changed_when: false
+#   failed_when: false
+
+- name: Setup OpenH264
+  ansible.builtin.shell: sudo dnf config-manager --enable fedora-cisco-openh264 -y
+  changed_when: false
+  failed_when: false
+  become: true
+
+
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+  become: true
+
+- name: install needed software, that can't run in distrobox
+  become: true
+  dnf:
+    pkg:
+      - distrobox
+      - syncthing
+      - i3
+      - rofi
+      - vim
+      - terminator
+      - clamav
+      - flatpak
+      - xclip
+      - lxpolkit
+      - timeshift
+      - libreoffice-langpack-da
+      - stow
+      - pavucontrol
+      - volumeicon
+      - blueman
+      - htop
+      - tldr
+      - tmux
+      - tree
+      - eza
+      - dua-cli
+      - which
+      - feh
+
+- name: remove preinstalled apps
+  become: true
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - libreoffice
+    - libreoffice-common
+    - thunderbird
+    - vlc
+    - gnome-2048
+    - gnome-sudoku
+    - gnome-robots
+    - gnome-nibbles
+    - gnome-chess
+    - gnome-klotski
+    - gnome-mahjongg
+    - gnome-mines
+    - gnome-taquin
+    - gnome-tetravex
+    - firefox-esr
+    - firefox
+    - kmahjongg
+    - kmines
+    - kpat
+    - kmail
+    - neochat
+    - krdc
+    - krfb
+    - pim-data-exporter
+    - pim-sieve-editor
+    - dragon
+    - elisa-player
