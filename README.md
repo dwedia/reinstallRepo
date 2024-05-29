@@ -1,4 +1,4 @@
-# reinstallRepo - Unified Reinstallation for Linux
+# Unified Reinstallation script for Linux
 
 This is my script for reinstallation on linux desktops. So far it should work on Debian based, and RedHat based distributions. It has been tested on Debian 12, Ubuntu 24.04, Fedora Workstation 39 and Fedora Workstation 40.
 
