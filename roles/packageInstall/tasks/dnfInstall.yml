@@ -84,8 +84,8 @@
     name: "{{ item }}"
     state: absent
   with_items:
-    - libreoffice
-    - libreoffice-common
+    - libreoffic*
+#    - libreoffice-common
     - thunderbird
     - vlc
     - gnome-2048
@@ -99,7 +99,7 @@
     - gnome-taquin
     - gnome-tetravex
     - firefox-esr
-    - firefox
+#    - firefox
     - kmahjongg
     - kmines
     - kpat
