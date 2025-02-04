@@ -84,7 +84,7 @@
     name: "{{ item }}"
     state: absent
   with_items:
-    - libreoffic*
+#    - libreoffic*
 #    - libreoffice-common
     - thunderbird
     - vlc
