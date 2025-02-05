@@ -86,8 +86,8 @@
     autoremove: true
   ignore_errors: true
   with_items:
-#    - libreoffic*
-#    - libreoffice-common
+    - libreoffic*
+    - libreoffice-common
     - thunderbird
     - vlc
     - gnome-2048
