@@ -83,6 +83,8 @@
   dnf:
     name: "{{ item }}"
     state: absent
+    autoremove: true
+  ignore_errors: true
   with_items:
 #    - libreoffic*
 #    - libreoffice-common
