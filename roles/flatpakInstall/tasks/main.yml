@@ -17,7 +17,7 @@
       - org.signal.Signal
       - org.videolan.VLC
 #      - org.mozilla.firefox
-      - org.freedesktop.Platform.ffmpeg-full/x86_64/22.08
+#      - org.freedesktop.Platform.ffmpeg-full/x86_64/22.08
       - org.libreoffice.LibreOffice
       - org.flameshot.Flameshot
     method: user
