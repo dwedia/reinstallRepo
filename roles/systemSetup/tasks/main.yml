@@ -5,28 +5,23 @@
     state: directory
     mode: '0755'
 
-- name: Add home/.local/bin to path
-  ansible.builtin.lineinfile:
-    path: $HOME/.bashrc
-    line: |
-      if [ -d "$HOME/.local/bin" ] ; then
-        PATH="$HOME/.local/bin:$PATH"
-      fi
-    state: present
-
 - name: Create the home/.local/scripts folder
   ansible.builtin.file:
     path: $HOME/.local/scripts
     state: directory
     mode: '0755'
 
-- name: Add home/.local/scripts to path
+- name: Add folders to path
   ansible.builtin.lineinfile:
     path: $HOME/.bashrc
     line: |
-      if [ -d "$HOME/.local/scripts" ] ; then
-        PATH="$HOME/.local/scripts:$PATH"
-      fi
+      for dir in "$HOME/.local/bin" "$HOME/.local/scripts" "$HOME/bin"; do
+        case ":$PATH:" in
+          *":$dir:"*) ;;
+          *) PATH="$dir:$PATH" ;;
+        esac
+      done
+      export PATH
     state: present
 
 - name: Include .bash_aliases in .bashrc
@@ -40,12 +35,6 @@
 
 - name: Create the home/Documents/gitRepos/myOwnRepos folder
   ansible.builtin.file:
-    path: $HOME/Documents/gitRepos/myOwnRepos
-    state: directory
-    mode: '0755'
-
-- name: Create the home/Documents/gitRepos/otherPeoplesRepos folder
-  ansible.builtin.file:
-    path: $HOME/Documents/gitRepos/otherPeoplesRepos
+    path: $HOME/Documents/myGitRepos
     state: directory
     mode: '0755'

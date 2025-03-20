@@ -75,6 +75,7 @@
   become: true
   dnf:
     pkg:
+      - gnome-session-xsession
       - distrobox
       - syncthing
       - i3
@@ -100,6 +101,11 @@
       - which
       - feh
       - ffmpeg
+      - gnome-screenshot
+      - xfce4-power-manager
+      - picom
+      - polybar
+      - arandr
     allowerasing: true
 
 
