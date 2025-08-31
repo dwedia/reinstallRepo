@@ -23,7 +23,7 @@
       - volumeicon-alsa
       - blueman
       - htop
-      - tldr
+      - tealdeer
       - tmux
       - tree
       # - eza # not in debian repo
