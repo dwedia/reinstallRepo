@@ -8,20 +8,20 @@
       - timeshift
       - distrobox
       - syncthing
-      - i3
-      - rofi
+#      - i3
+#      - rofi
       - vim
       - terminator
       - clamav
       - clamav-freshclam
       - flatpak
-      - xclip
+#      - xclip
       - lxpolkit
       # - libreoffice-langpack-da
       - stow
       - pavucontrol
       - volumeicon-alsa
-      - blueman
+#      - blueman
       - htop
       - tealdeer
       - tmux
