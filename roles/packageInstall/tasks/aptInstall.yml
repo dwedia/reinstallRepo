@@ -30,6 +30,7 @@
       # - dua-cli # not in debian repo
       - which
       - feh
+      - alacritty
 
 
 - name: Remove preinstalled apps
