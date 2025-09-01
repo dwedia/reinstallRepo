@@ -8,29 +8,24 @@
       - timeshift
       - distrobox
       - syncthing
-#      - i3
-#      - rofi
       - vim
       - terminator
       - clamav
       - clamav-freshclam
       - flatpak
-#      - xclip
       - lxpolkit
-      # - libreoffice-langpack-da
       - stow
       - pavucontrol
       - volumeicon-alsa
-#      - blueman
       - htop
       - tealdeer
       - tmux
       - tree
-      # - eza # not in debian repo
-      # - dua-cli # not in debian repo
+      - eza 
       - which
       - feh
       - alacritty
+      - curl
 
 
 - name: Remove preinstalled apps
@@ -64,8 +59,14 @@
     - krfb
     - pim-data-exporter
     - pim-sieve-editor
-    - dragon
+    - dragonplayer
     - elisa-player
+    - akregator
+    - dragonplayer
+    - juk
+    - kaddressbook
+    - kaddressbook-data
+    - korganizer
 
 - name: Upgrade all installed packages to latest version
   become: true
